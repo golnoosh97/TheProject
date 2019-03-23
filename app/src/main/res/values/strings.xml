@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Happiness_new_peyk</string>
+    <string name="Title"> Title</string>
+    <string name="SubTitle">SubTitle</string> <string/>
+    <string name="appbar_scrolling_view_behavior" />
+
+</resources>
