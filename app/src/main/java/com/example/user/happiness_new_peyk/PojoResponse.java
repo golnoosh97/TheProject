@@ -4,17 +4,19 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class PojoResponse {
+/*public class PojoResponse {
 
-    @SerializedName("batchcomplete")
+    public List<Pojo> getPojoList() {
+        return pojoList;
+    }
 
+    public void setPojoList(List<Pojo> pojoList) {
+        this.pojoList = pojoList;
+    }
+
+    @SerializedName("allimages")
     private List<Pojo> pojoList;
 
-    public List<Pojo> getpojo() {
-        return  pojoList;
-    }
 
-    public void setPojo(List<Pojo>pojoList) {
-        this.pojoList=pojoList;
-    }
-}
+
+}*/

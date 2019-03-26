@@ -15,28 +15,29 @@ import java.util.List;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
 
     private Context context;
-    private List<Pojo> PojoList;
-    private List<Pojo.Query>queryList;
+    private List<Query> queryList;
+    private List<AllimagesItem> allimagesItemList;
+    //private List<Pojo>pojoList;
     private List<String> url;
+    private List<String>name;
 
-
-
-    public ListAdapter(Context context,List<String>url) {
-        this.context=context;
-        this.url=url;
+    public ListAdapter(Context context, List<String> url,List<String>name) {
+        this.context = context;
+        this.url = url;
+        this.name=name;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
         private CardView cardView;
-        public TextView Item_position;
+        public TextView name;
         public ImageView image;
 
         public MyViewHolder(CardView cardView) {
             super(cardView);
             this.cardView = cardView;
-           // Item_position = (TextView) cardView.findViewById(R.id.item_position);
-            image = (ImageView) cardView.findViewById(R.id.img);
+            name = cardView.findViewById(R.id.item_position);
+            image = cardView.findViewById(R.id.img);
         }
     }
 
@@ -49,16 +50,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         CardView cardView = holder.cardView;
-        Pojo pojo = PojoList.get(position);
-       // holder.Item_position.setText(pojo.getItem_position());
+        AllimagesItem allimagesItem = allimagesItemList.get(position);
+        //Pojo pojo =pojoList.get(position);
+        holder.name.setText(name.get(position));
         // holder.image.setImageResource(PojoList.get(position).getImg());
         Picasso.with(context)
-                .load(pojo.get);
+                .load(allimagesItem.getUrl())
                 .into(holder.image);
     }
 
     @Override
     public int getItemCount() {
-        return PojoList.size();
+        return allimagesItemList.size();
     }
 }

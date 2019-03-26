@@ -22,9 +22,11 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     private Context context;
-    private List<Pojo> pojoList;
-    private List<Pojo.Query> queryList;
+    private List<Query> queryList;
+    private List<AllimagesItem> allimagesItemList;
+    // private List<Pojo>pojoList;
     private List<String> url = new ArrayList<>(10);
+    private List<String> name = new ArrayList<>(10);
 
 
     private RecyclerView recyclerView;
@@ -40,22 +42,26 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         MyApi apiService = ItemApi.getClient().create(MyApi.class);
-        Call<PojoResponse> call = apiService.getPojo("withBody");
-        call.enqueue(new Callback<PojoResponse>() {
+        Call<Query> call = apiService.getAllimagesItemList();
+        call.enqueue(new Callback<Query>() {
             @Override
-            public void onResponse(Call<PojoResponse> call, Response<PojoResponse> response) {
+            public void onResponse(Call<Query> call, Response<Query> response) {
                 if (response.isSuccessful()) {
-                    List<Pojo>pojoList = response.body().getpojo();
+
+                    List<AllimagesItem> allimagesItemList = response.body().getAllimages();
 
                     for (int i = 0; i < 10; i++) {
-                        url.add(pojoList.get(i).getQuery().getAllimages().);
+                        url.add(allimagesItemList.get(i).getUrl());
+                        name.add(allimagesItemList.get(i).getName());
+                        // String url= queryList.get(i).getAllimages().toString();
                     }
-                    setupRecyclerView(pojoList);
+                    Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
+                    setupRecyclerView(allimagesItemList);
                 }
             }
 
             @Override
-            public void onFailure(Call<PojoResponse> call, Throwable t) {
+            public void onFailure(Call<Query> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Connection Problem !", Toast.LENGTH_SHORT).show();
 
             }
@@ -63,16 +69,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void setupRecyclerView(final List<Pojo> pojoList) {
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+    private void setupRecyclerView(final List<AllimagesItem> allimagesItemList) {
+        recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
-        mAdapter = new ListAdapter(context,url);
+        mAdapter = new ListAdapter(context, url, name);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
 
 
