@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -22,13 +25,11 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     private Context context;
-    private List<Query> queryList;
-    private List<AllimagesItem> allimagesItemList;
-    // private List<Pojo>pojoList;
+    //   private List<AllimagesItem> allimagesItemList;
+    private List<AllimagesItem> allimagesItemList = new ArrayList<>();
+    private List<com.example.user.happiness_new_peyk.Response> responseList;
     private List<String> url = new ArrayList<>(10);
     private List<String> name = new ArrayList<>(10);
-
-
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private LinearLayoutManager linearLayoutManager;
@@ -37,47 +38,42 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        context = this;
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         MyApi apiService = ItemApi.getClient().create(MyApi.class);
-        Call<Query> call = apiService.getAllimagesItemList();
-        call.enqueue(new Callback<Query>() {
+        Call<com.example.user.happiness_new_peyk.Response> call = apiService.getAllimagesItemList();
+        call.enqueue(new Callback<com.example.user.happiness_new_peyk.Response>() {
             @Override
-            public void onResponse(Call<Query> call, Response<Query> response) {
-                if (response.isSuccessful()) {
+            public void onResponse(Call<com.example.user.happiness_new_peyk.Response> call,
+                                   Response<com.example.user.happiness_new_peyk.Response> response) {
+                allimagesItemList.addAll(response.body().getQuery().getAllimages());
+                setupRecyclerView(allimagesItemList);
+            }
 
-                    List<AllimagesItem> allimagesItemList = response.body().getAllimages();
-
-                    for (int i = 0; i < 10; i++) {
-                        url.add(allimagesItemList.get(i).getUrl());
-                        name.add(allimagesItemList.get(i).getName());
-                        // String url= queryList.get(i).getAllimages().toString();
-                    }
-                    Toast.makeText(MainActivity.this, "success", Toast.LENGTH_SHORT).show();
-                    setupRecyclerView(allimagesItemList);
+            @Override
+            public void onFailure(Call<com.example.user.happiness_new_peyk.Response> call, Throwable t) {
+                if (t instanceof IOException) {
+                    Toast.makeText(MainActivity.this, "Connection Problem !", Toast.LENGTH_SHORT).show();
                 }
             }
-
-            @Override
-            public void onFailure(Call<Query> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Connection Problem !", Toast.LENGTH_SHORT).show();
-
-            }
         });
+
     }
 
 
-    private void setupRecyclerView(final List<AllimagesItem> allimagesItemList) {
+    private void setupRecyclerView(final List<AllimagesItem> allimagesItemList1) {
         recyclerView = findViewById(R.id.recyclerview);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
-        mAdapter = new ListAdapter(context, url, name);
+        mAdapter = new ListAdapter(context, allimagesItemList1);
+        recyclerView.setAdapter(mAdapter);
         linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
     }
 
 

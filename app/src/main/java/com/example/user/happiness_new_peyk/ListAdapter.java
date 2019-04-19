@@ -3,6 +3,7 @@ package com.example.user.happiness_new_peyk;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -10,32 +11,32 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
 
     private Context context;
-    private List<Query> queryList;
     private List<AllimagesItem> allimagesItemList;
-    //private List<Pojo>pojoList;
+    private List<AllimagesItem> allimagesItemList1 = new ArrayList<AllimagesItem>();
     private List<String> url;
-    private List<String>name;
+    private List<String> name;
 
-    public ListAdapter(Context context, List<String> url,List<String>name) {
+    public ListAdapter(Context context, List<AllimagesItem> allimagesItemList1) {
         this.context = context;
-        this.url = url;
-        this.name=name;
+        Log.e("TESTTEST", allimagesItemList1.toString());
+        this.allimagesItemList1 = allimagesItemList1;
+        // this.url=url;
+        // this.name=name;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        private CardView cardView;
         public TextView name;
         public ImageView image;
 
         public MyViewHolder(CardView cardView) {
             super(cardView);
-            this.cardView = cardView;
             name = cardView.findViewById(R.id.item_position);
             image = cardView.findViewById(R.id.img);
         }
@@ -49,18 +50,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        CardView cardView = holder.cardView;
-        AllimagesItem allimagesItem = allimagesItemList.get(position);
-        //Pojo pojo =pojoList.get(position);
-        holder.name.setText(name.get(position));
-        // holder.image.setImageResource(PojoList.get(position).getImg());
-        Picasso.with(context)
-                .load(allimagesItem.getUrl())
-                .into(holder.image);
+        // AllimagesItem allimagesItem = allimagesItemList.get(position);
+        //  holder.name.setText(name.get(position));
+        Picasso.with(context).load(allimagesItemList1.get(position).getUrl()).into(holder.image);
+        holder.name.setText(allimagesItemList1.get(position).getName());
     }
 
     @Override
     public int getItemCount() {
-        return allimagesItemList.size();
+        return allimagesItemList1.size();
     }
 }
