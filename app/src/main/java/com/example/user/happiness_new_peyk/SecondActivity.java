@@ -29,6 +29,7 @@ public class SecondActivity extends AppCompatActivity {
         String str = bundle.getString("image");
         imageView.setImageBitmap(image);
 
+
       //  Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.image);
       // image.setImageBitmap(bmp );
 
