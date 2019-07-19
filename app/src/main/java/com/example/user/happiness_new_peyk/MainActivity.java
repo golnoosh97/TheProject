@@ -1,6 +1,9 @@
 package com.example.user.happiness_new_peyk;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -10,8 +13,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -46,8 +52,7 @@ public class MainActivity extends AppCompatActivity {
         Call<com.example.user.happiness_new_peyk.Response> call = apiService.getAllimagesItemList();
         call.enqueue(new Callback<com.example.user.happiness_new_peyk.Response>() {
             @Override
-            public void onResponse(Call<com.example.user.happiness_new_peyk.Response> call,
-                                   Response<com.example.user.happiness_new_peyk.Response> response) {
+            public void onResponse(Call<com.example.user.happiness_new_peyk.Response> call, Response<com.example.user.happiness_new_peyk.Response> response) {
                 allimagesItemList.addAll(response.body().getQuery().getAllimages());
                 setupRecyclerView(allimagesItemList);
             }
@@ -74,7 +79,32 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+        recyclerView.addOnItemTouchListener(new  RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener(){
+
+           public void onItemClick(View view, int position){
+
+               AllimagesItem allimagesItem=allimagesItemList1.get(position);
+               String str = allimagesItem.getUrl();
+
+               Bundle bundle = new Bundle();
+               bundle.putString("image",str);
+
+               Intent go = new Intent(MainActivity.this, SecondActivity.class);
+               go.putExtras(bundle);
+               startActivity(go);
+
+           }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }
+        ));
+
     }
+
 
 
     @Override

@@ -50,10 +50,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
+          //CardView cardView = holder.cardView;
         // AllimagesItem allimagesItem = allimagesItemList.get(position);
         //  holder.name.setText(name.get(position));
         Picasso.with(context).load(allimagesItemList1.get(position).getUrl()).into(holder.image);
         holder.name.setText(allimagesItemList1.get(position).getName());
+
     }
 
     @Override

@@ -49,4 +49,9 @@ public class Response{
 			",query = '" + query + '\'' + 
 			"}";
 		}
+
+
+	public static void main(String[] args) {
+		System.out.println("jddjdbdkb");
+	}
 }
