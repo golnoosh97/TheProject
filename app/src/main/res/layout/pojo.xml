@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!-- FIXME: What the hell is pojo :))). Name the resource list_item or main_item -->
+<!--FIXME: Have a better design. Use font and colors -->
 <android.support.v7.widget.CardView
 
     xmlns:android="http://schemas.android.com/apk/res/android"

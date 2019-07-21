@@ -6,6 +6,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+// FIXME: Move Classes that relate to RecyclerView stuff to a package called utils or listutils or ...
 public class RecyclerItemClickListener  implements RecyclerView.OnItemTouchListener{
 
     private OnItemClickListener mListener;

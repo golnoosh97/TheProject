@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
+// FIXME: Name should be standard: AllImagesItem
+// FIXME: Try to add all model classes in a package
+// So move classes like AllImagesItem, Query, Response to a package called model. That way you can recognize Model classes faster and easier.
 public class AllimagesItem{
 
 	@SerializedName("ns")

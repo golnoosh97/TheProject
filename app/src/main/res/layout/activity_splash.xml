@@ -7,6 +7,8 @@
     android:orientation="vertical"
     tools:context=".SplashActivity">
 
+    <!-- FIXME: Again, care about warning and try to make your code with less warnings -->
+    <!--FIXME: Try not to add size like this, if you do, test it on different screen sizes -->
     <ImageView
         android:layout_width="434dp"
         android:layout_height="match_parent"

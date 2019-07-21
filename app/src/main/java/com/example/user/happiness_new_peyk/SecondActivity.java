@@ -12,9 +12,15 @@ import android.widget.ImageView;
 import java.io.File;
 import java.io.FileOutputStream;
 
+// FIXME: Don't add too much ENTER... You are making the code less readable and longer. Add enter when needed.
 public class SecondActivity extends AppCompatActivity {
 
     private ImageView imageView;
+
+    // FIXME: You are invoking `getDrawingCache` on `imageView` which is up there...
+    // IT's NULL because it has not assignments. If you really want to do this, call this method when you assign a value to it's object which is imageView.
+    // So delete the assignment
+    // Bitmap image;
     Bitmap image= imageView.getDrawingCache();
 
     @Override
@@ -23,6 +29,8 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         imageView=(ImageView) findViewById(R.id.img);
+        // FIXME: And here you can set the imageDrawingCache
+        // image = imageView.getDrawingCache()
 
         Bundle bundle = getIntent().getExtras();
 

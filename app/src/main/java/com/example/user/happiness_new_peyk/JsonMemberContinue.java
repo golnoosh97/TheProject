@@ -10,6 +10,7 @@ public class JsonMemberContinue{
 	private String jsonMemberContinue;
 
 	@SerializedName("aicontinue")
+	// FIXME: No need to keep the name like this. Follow camelCase for variable and methods names
 	private String aicontinue;
 
 	public void setJsonMemberContinue(String jsonMemberContinue){

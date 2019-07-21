@@ -8,12 +8,15 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity">
 
+    <!--FIXME: Add titleColor color and subtitleColor to make the texts with better colors -->
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#990000"
         android:elevation="3dp" />
+    <!-- FIXME: Care about warnings like the one above. Elevation works if api is 21 (android 5) or higher -->
+    <!-- FIXME: Add better name standard for ids, like recyclerView or recycler_view -->
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"

@@ -18,6 +18,7 @@ android {
     }
 }
 
+// FIXME: Organize the dependencies block. Add comments and enters to make the readable (like separate support libraries, retrofit, etc.)
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     //noinspection GradleCompatible
