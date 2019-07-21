@@ -10,9 +10,10 @@
     <android.support.v7.widget.CardView
 
         android:id="@+id/cardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="280dp"
+        android:layout_height="430dp"
         android:layout_gravity="center"
+        android:layout_marginTop="50dp"
         app:cardCornerRadius="50dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="117dp"
@@ -20,22 +21,22 @@
 
         <ImageView
             android:id="@+id/Profile_image"
-            android:layout_margin="8dp"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_vertical"
-            android:gravity="top|center_vertical"
-            android:src="@mipmap/ic_launcher" />
+            android:layout_width="300dp"
+            android:layout_height="280dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp" />
+
 
     </android.support.v7.widget.CardView>
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="bottom|center_vertical"
-        android:textColor="@android:color/holo_red_dark"
-        android:text="Question Page" />
+        android:layout_width="217dp"
+        android:layout_height="80dp"
+        android:layout_margin="100dp"
+        android:text="Save"
+        android:textSize="30dp"
+        android:textColor="@android:color/holo_red_dark" />
 
 
 </LinearLayout>

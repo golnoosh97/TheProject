@@ -86,9 +86,11 @@ public class MainActivity extends AppCompatActivity {
 
                AllimagesItem allimagesItem=allimagesItemList1.get(position);
                String str = allimagesItem.getUrl();
+               String title =allimagesItem.getTitle();
 
                Bundle bundle = new Bundle();
                bundle.putString("image",str);
+               bundle.putString("title",title);
 
                Intent go = new Intent(MainActivity.this, SecondActivity.class);
                go.putExtras(bundle);
