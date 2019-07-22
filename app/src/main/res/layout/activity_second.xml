@@ -20,7 +20,7 @@
         tools:layout_editor_absoluteY="87dp">
 
         <ImageView
-            android:id="@+id/Profile_image"
+            android:id="@+id/image"
             android:layout_width="300dp"
             android:layout_height="280dp"
             android:layout_gravity="center"

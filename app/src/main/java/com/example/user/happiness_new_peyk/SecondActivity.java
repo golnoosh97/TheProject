@@ -1,56 +1,90 @@
 package com.example.user.happiness_new_peyk;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Date;
+
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.io.FileOutputStream;
 
-public class SecondActivity extends AppCompatActivity {
+import static java.security.AccessController.getContext;
 
-   // private ImageView imageView;
-   // Bitmap image= imageView.getDrawingCache();
+public class SecondActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        ImageView imageView= findViewById(R.id.Profile_image);
-        Bitmap bitmap = getIntent().getParcelableExtra("image");
-
-        // ImageView imageView= findViewById(R.id.img);
-       // TextView textView=findViewById(R.id.title);
-
-        Bundle bundle = getIntent().getExtras();
-
-        String str = bundle.getString("image");
-     //   String s=bundle.getString("title");
-
-      //  textView.setText(s);
-        imageView.setImageBitmap(bitmap);
-
-
-
-       // Bundle bundle = getIntent().getExtras();
-
-       // String str = bundle.getString("image");
-       // imageView.setImageBitmap(image);
-
-
-
-
+        final ImageView imageView= findViewById(R.id.image);
         Button button = (Button) findViewById(R.id.button);
+        Bundle bundle = getIntent().getExtras();
+        final String str = bundle.getString("image");
+
+        Picasso.with(this).load(str).into(imageView);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Picasso.with(getApplicationContext()).load(str).into(new Target() {
+                    @Override
+                    public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+
+                        boolean success = false;
+                        try{
+                            File file = new File (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+toString()+"\"/HIR_IMG\"");
+                            if(!file.exists()){
+                                file.mkdirs();
+                            }
+                            FileOutputStream fileOutputStream = new FileOutputStream(new File(file,new Date().toString() + ".jpg"));
+                            bitmap.compress(Bitmap.CompressFormat.JPEG,90,fileOutputStream);
+                            fileOutputStream.flush();
+                            fileOutputStream.close();
+
+                          //  Toast.makeText(getApplicationContext(), "Save", Toast.LENGTH_LONG).show();
+
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        if (success) {
+                            Toast.makeText(getApplicationContext(), "Image saved with success", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Error during image saving", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
+
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                    }
+                });
 
             }
         });
@@ -58,7 +92,7 @@ public class SecondActivity extends AppCompatActivity {
 
     }
 
-    private void createDirectoryAndSaveFile(Bitmap imageToSave, String fileName){
+   /* private void createDirectoryAndSaveFile(Bitmap imageToSave, String fileName){
 
         File direcet =new File(Environment.getExternalStorageDirectory()+ "/DirName");
         if(!direcet.exists()){
@@ -80,7 +114,7 @@ public class SecondActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
 
 }
