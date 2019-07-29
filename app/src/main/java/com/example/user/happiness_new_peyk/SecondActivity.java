@@ -1,5 +1,6 @@
 package com.example.user.happiness_new_peyk;
 
+import android.app.usage.ExternalStorageStats;
 import android.graphics.Bitmap;
 
 import java.io.IOException;
@@ -49,9 +50,9 @@ public class SecondActivity extends AppCompatActivity {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
 
-                        boolean success = false;
+                       // boolean success = false;
                         try{
-                            File file = new File (Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+toString()+"\"/HIR_IMG\"");
+                            File file = new File ( Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)+toString()+"\"/HIR_IMG\"");
                             if(!file.exists()){
                                 file.mkdirs();
                             }
@@ -67,11 +68,11 @@ public class SecondActivity extends AppCompatActivity {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        if (success) {
+                     /*   if (success) {
                             Toast.makeText(getApplicationContext(), "Image saved with success", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(getApplicationContext(), "Error during image saving", Toast.LENGTH_LONG).show();
-                        }
+                        }*/
 
                     }
 
