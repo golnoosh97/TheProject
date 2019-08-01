@@ -1,5 +1,6 @@
 package com.example.user.happiness_new_peyk;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -31,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     private Context context;
+    AppDatabace appDatabace;
+    TextView textView ;
+
     //   private List<AllimagesItem> allimagesItemList;
     private List<AllimagesItem> allimagesItemList = new ArrayList<>();
     private List<com.example.user.happiness_new_peyk.Response> responseList;
@@ -47,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
+        textView=findViewById(R.id.item_position);
+        appDatabace= Room.databaseBuilder(context,AppDatabace.class,"RoomDB").build();
+
 
         MyApi apiService = ItemApi.getClient().create(MyApi.class);
         Call<com.example.user.happiness_new_peyk.Response> call = apiService.getAllimagesItemList();
@@ -79,6 +90,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+
+        List<AllimagesItem>allimagesItemList2 = appDatabace.items().getTitle();
+        textView.setText(allimagesItemList2.get(0).getTitle());
+
+
+
+
 
         recyclerView.addOnItemTouchListener(new  RecyclerItemClickListener(getApplicationContext(), recyclerView, new RecyclerItemClickListener.OnItemClickListener(){
 

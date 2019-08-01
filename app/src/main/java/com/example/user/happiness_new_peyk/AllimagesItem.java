@@ -1,12 +1,18 @@
 package com.example.user.happiness_new_peyk;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
 import javax.annotation.Generated;
 
+@Entity(tableName = "AllimagesItem")
 @Generated("com.robohorse.robopojogenerator")
 public class AllimagesItem{
 
+	//@PrimaryKey(autoGenerate = true)
 	@SerializedName("ns")
 	private int ns;
 
@@ -19,8 +25,11 @@ public class AllimagesItem{
 	@SerializedName("descriptionshorturl")
 	private String descriptionshorturl;
 
+    @PrimaryKey(autoGenerate = true)
+	@ColumnInfo(name = "title")
 	@SerializedName("title")
 	private String title;
+
 
 	@SerializedName("url")
 	private String url;
