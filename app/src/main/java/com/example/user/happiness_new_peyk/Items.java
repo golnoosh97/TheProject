@@ -15,7 +15,7 @@ public interface Items {
 
     @Query("SELECT title FROM AllimagesItem")
     //AllimagesItem getTitle(String title);
-       List<AllimagesItem>getTitle();
+    List<AllimagesItem>getTitle();
 
    // @Query("SELECT COUNT(title) from AllimagesItem")
    // int countTitles();
