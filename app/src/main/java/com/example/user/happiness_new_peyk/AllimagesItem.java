@@ -12,7 +12,10 @@ import javax.annotation.Generated;
 @Generated("com.robohorse.robopojogenerator")
 public class AllimagesItem{
 
-	//@PrimaryKey(autoGenerate = true)
+	@PrimaryKey(autoGenerate = true)
+    private  transient int  id;
+
+
 	@SerializedName("ns")
 	private int ns;
 
@@ -25,7 +28,6 @@ public class AllimagesItem{
 	@SerializedName("descriptionshorturl")
 	private String descriptionshorturl;
 
-    @PrimaryKey(autoGenerate = true)
 	@ColumnInfo(name = "title")
 	@SerializedName("title")
 	private String title;

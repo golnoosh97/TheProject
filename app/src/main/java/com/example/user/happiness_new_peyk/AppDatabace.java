@@ -8,10 +8,10 @@ import android.content.Context;
 @Database(entities = {AllimagesItem.class},version = 1)
 public abstract class AppDatabace extends RoomDatabase {
 
-   // private static AppDatabace INSTANCE;
+    private static AppDatabace INSTANCE;
     public abstract Items items();
 
-   /* public static AppDatabace getAppDatabace(Context context){
+    public static AppDatabace getAppDatabace(Context context){
         if(INSTANCE == null){
 
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(), AppDatabace.class, "user-database")
@@ -24,7 +24,7 @@ public abstract class AppDatabace extends RoomDatabase {
 
     public static void destroyInstance() {
         INSTANCE = null;
-    }*/
+    }
 
 
 }
